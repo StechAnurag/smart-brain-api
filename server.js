@@ -1,24 +1,24 @@
+const dotenv = require("dotenv");
 const express = require("express");
 const bcrypt = require("bcrypt-nodejs");
 const cors = require("cors");
 const knex = require("knex");
-const dotenv = require("dotenv");
+
+dotenv.config({ path: "./.env" });
 
 const register = require("./controllers/register");
 const signin = require("./controllers/signin");
 const profile = require("./controllers/profile");
 const image = require("./controllers/image");
 
-dotenv.config({ path: ".env" });
-
 const db = knex({
   // connect to your own database here:
   client: "pg",
   connection: {
-    host: "127.0.0.1",
-    user: "smartUser",
-    password: "smartUser",
-    database: "smart-brain",
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
   },
 });
 
